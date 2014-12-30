@@ -8,16 +8,30 @@ namespace HiveEngine.Tests.Unit
     class PositionalParsingTests
     {
         [Test]
-        public void grid_is_26_by_26()
+        public void grid_is_created_100_by_100()
         {
             var grid = new Grid();
 
-            grid.TileAt.GetLength(0).Should().Be(26);
-            grid.TileAt.GetLength(1).Should().Be(26);
+            grid.TileAt.GetLength(0).Should().Be(100);
+            grid.TileAt.GetLength(1).Should().Be(100);
+        }
+
+        [Test]
+        public void new_grid_contains_no_tiles()
+        {
+            var grid = new Grid();
+
+            for (var x = 0; x < grid.TileAt.GetLength(0); x++)
+            {
+                for (var y = 0; y < grid.TileAt.GetLength(1); y++)
+                {
+                    grid.TileAt[x, y].Should().Be(Tile.None);
+                }
+            }
         }
 
         [Test, Ignore]
-        public void single_tile_is_at_0_0()
+        public void single_tile_is_at_50_50()
         {
             var grid = GridResourceParser.ParseGrid("single-tile");
 

@@ -4,16 +4,29 @@ namespace HiveEngine
 {
     public class Grid
     {
-
+        const int GridSize = 100;
 
         public Grid()
         {
             Tiles = new List<Tile>();
-            TileAt = new Tile[26, 26];
+            TileAt = new Tile[GridSize, GridSize];
+
+            FileWithEmptyTiles();
         }
 
-        public IEnumerable<Tile> Tiles { get; set; }
+        private void FileWithEmptyTiles()
+        {
+            for (var x = 0; x < TileAt.GetLength(0); x++)
+            {
+                for (var y = 0; y < TileAt.GetLength(1); y++)
+                {
+                    TileAt[x, y] = Tile.None;
+                }
+            }
+        }
 
-        public Tile[,] TileAt { get; set; }
+        public IEnumerable<Tile> Tiles { get; private set; }
+
+        public Tile[,] TileAt { get; private set; }
     }
 }
