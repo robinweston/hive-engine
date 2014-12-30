@@ -58,6 +58,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Grids\empty.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HiveEngine\HiveEngine.csproj">
+      <Project>{5d3a64a7-8b13-44a0-96df-08aad18ce571}</Project>
+      <Name>HiveEngine</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Grids\single-tile.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

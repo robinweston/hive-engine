@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 
 using FluentAssertions;
@@ -23,6 +21,17 @@ namespace HiveEngine.Tests.Unit
             grid.Tiles.Count().Should().Be(0);
         }
 
+        [Test]
+        public void single_tile_grid_parses_correctly()
+        {
+            var singleTileText = ParseFile("single-tile.txt");
+
+            var gridParser = new GridParser();
+            var grid = gridParser.ParseGrid(singleTileText);
+
+            grid.Tiles.Count().Should().Be(1);
+        }
+
         private static string ParseFile(string fileName)
         {
             var assembly = typeof(ParsingTests).Assembly;
@@ -34,27 +43,5 @@ namespace HiveEngine.Tests.Unit
                 return reader.ReadToEnd();
             }
         }
-    }
-
-    public class GridParser
-    {
-        public Grid ParseGrid(string gridText)
-        {
-            return new Grid();
-        }
-    }
-
-    public class Grid
-    {
-        public Grid()
-        {
-            Tiles = new List<Tile>();
-        }
-
-        public IEnumerable<Tile> Tiles { get; set; }
-    }
-
-    public class Tile
-    {
     }
 }
