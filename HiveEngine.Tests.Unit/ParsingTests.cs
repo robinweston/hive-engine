@@ -27,14 +27,33 @@ namespace HiveEngine.Tests.Unit
         }
 
         [Test]
-        public void two_tile_grid_parse_correctly()
+        public void single_white_queen_tile_parses_correctly()
         {
-            var grid = ParseGrid("two-tiles");
+            var grid = ParseGrid("single-white-queen");
+
+            grid.Tiles.Single().Color.Should().Be(TileColor.White);
+        }
+
+        [Test]
+        public void single_black_queen_tile_parses_correctly()
+        {
+            var grid = ParseGrid("single-black-queen");
+
+            grid.Tiles.Single().Color.Should().Be(TileColor.Black);
+        }
+
+
+        [Test]
+        [TestCase("two-tiles-horizontal")]
+        [TestCase("two-tiles-vertical")]
+        public void two_tile_grids_parse_correctly(string gridName)
+        {
+            var grid = ParseGrid(gridName);
 
             grid.Tiles.Count().Should().Be(2);
         }
 
-        private Grid ParseGrid(string gridName)
+        private static Grid ParseGrid(string gridName)
         {
             var gridParser = new GridParser();
 

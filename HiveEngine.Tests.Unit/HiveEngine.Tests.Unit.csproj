@@ -68,7 +68,16 @@
     <EmbeddedResource Include="Grids\single-tile.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Grids\two-tiles.txt" />
+    <EmbeddedResource Include="Grids\two-tiles-horizontal.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Grids\two-tiles-vertical.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Grids\single-white-queen.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Grids\single-black-queen.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

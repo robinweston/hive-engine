@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
-
-using HiveEngine.Extensions;
+using System.Text.RegularExpressions;
 
 namespace HiveEngine
 {
@@ -11,11 +9,12 @@ namespace HiveEngine
         {
             var tiles = new List<Tile>();
 
-            var forwardSlashIndexes = gridText.GetAllIndexes("/");
+            var matches = Regex.Matches(gridText, "[A-Za-z]");
 
-            for (var i = 0; i < forwardSlashIndexes.Count() / 2; i++)
+            foreach (var index in matches)
             {
-                tiles.Add(new Tile());
+                var tileColor = Regex.Match(gridText, "[A-Z]").Success ? TileColor.Black : TileColor.White;
+                tiles.Add(new Tile(tileColor));   
             }
 
             return new Grid { Tiles = tiles };
