@@ -13,10 +13,7 @@ namespace HiveEngine.Tests.Unit
         [Test]
         public void empty_file_parses_to_empty_grid()
         {
-            var gridText = ParseFile("empty.txt");
-
-            var gridParser = new GridParser();
-            var grid = gridParser.ParseGrid(gridText);
+            var grid = ParseGrid("empty");
 
             grid.Tiles.Count().Should().Be(0);
         }
@@ -24,12 +21,19 @@ namespace HiveEngine.Tests.Unit
         [Test]
         public void single_tile_grid_parses_correctly()
         {
-            var singleTileText = ParseFile("single-tile.txt");
-
-            var gridParser = new GridParser();
-            var grid = gridParser.ParseGrid(singleTileText);
+            var grid = ParseGrid("single-tile");
 
             grid.Tiles.Count().Should().Be(1);
+        }
+
+        private Grid ParseGrid(string gridName)
+        {
+            var gridParser = new GridParser();
+
+            var fileName = gridName + ".txt";
+            var gridText = ParseFile(fileName);
+
+            return gridParser.ParseGrid(gridText);
         }
 
         private static string ParseFile(string fileName)
