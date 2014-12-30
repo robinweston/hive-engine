@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
+
+using HiveEngine.Extensions;
 
 namespace HiveEngine
 {
@@ -6,11 +9,16 @@ namespace HiveEngine
     {
         public Grid ParseGrid(string gridText)
         {
-            if (gridText.Length > 0)
+            var tiles = new List<Tile>();
+
+            var forwardSlashIndexes = gridText.GetAllIndexes("/");
+
+            for (var i = 0; i < forwardSlashIndexes.Count() / 2; i++)
             {
-                return new Grid { Tiles = new List<Tile> { new Tile() } };
+                tiles.Add(new Tile());
             }
-            return new Grid();
+
+            return new Grid { Tiles = tiles };
         }
     }
 }

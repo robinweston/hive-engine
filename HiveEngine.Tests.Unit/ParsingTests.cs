@@ -26,6 +26,14 @@ namespace HiveEngine.Tests.Unit
             grid.Tiles.Count().Should().Be(1);
         }
 
+        [Test]
+        public void two_tile_grid_parse_correctly()
+        {
+            var grid = ParseGrid("two-tiles");
+
+            grid.Tiles.Count().Should().Be(2);
+        }
+
         private Grid ParseGrid(string gridName)
         {
             var gridParser = new GridParser();
