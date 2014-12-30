@@ -67,10 +67,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Grids\single-tile.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Grids\two-tiles-horizontal.txt" />
+    <EmbeddedResource Include="Grids\two-queens-horizontal.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Grids\two-tiles-vertical.txt" />

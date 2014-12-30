@@ -18,14 +18,6 @@ namespace HiveEngine.Tests.Unit
         }
 
         [Test]
-        public void single_tile_grid_parses_correctly()
-        {
-            var grid = GridResourceParser.ParseGrid("single-tile");
-
-            grid.Tiles.Count().Should().Be(1);
-        }
-
-        [Test]
         public void single_white_queen_tile_parses_correctly()
         {
             var grid = GridResourceParser.ParseGrid("single-white-queen");
@@ -42,7 +34,16 @@ namespace HiveEngine.Tests.Unit
         }
 
         [Test]
-        [TestCase("two-tiles-horizontal")]
+        public void black_and_white_queen_parse_correctly()
+        {
+            var grid = GridResourceParser.ParseGrid("two-queens-horizontal");
+
+            grid.Tiles.ElementAt(0).Color.Should().Be(TileColor.White);
+            grid.Tiles.ElementAt(1).Color.Should().Be(TileColor.Black);
+        }
+
+        [Test]
+        [TestCase("two-queens-horizontal")]
         [TestCase("two-tiles-vertical")]
         public void two_tile_grids_parse_correctly(string gridName)
         {

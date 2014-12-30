@@ -30,12 +30,12 @@ namespace HiveEngine.Tests.Unit
             }
         }
 
-        [Test, Ignore]
-        public void single_tile_is_at_50_50()
+        [Test]
+        public void single_tile_is_at_position_50_50()
         {
-            var grid = GridResourceParser.ParseGrid("single-tile");
+            var grid = GridResourceParser.ParseGrid("single-white-queen");
 
-            grid.TileAt[0, 0].Should().NotBe(Tile.None);
+            grid.TileAt[50, 50].Should().NotBe(Tile.None);
         }
     }
 }

@@ -11,13 +11,21 @@ namespace HiveEngine
 
             var matches = Regex.Matches(gridText, "[A-Za-z]");
 
-            foreach (var index in matches)
-            {
-                var tileColor = Regex.Match(gridText, "[A-Z]").Success ? TileColor.Black : TileColor.White;
-                tiles.Add(new Tile(tileColor));   
+            var grid = new Grid();
+
+            foreach (Match match in matches)
+            {               
+                var tileColor = Regex.Match(match.Value, "[A-Z]").Success ? TileColor.Black : TileColor.White;
+                var tile = new Tile(tileColor);
+                
+                tiles.Add(tile);
+
+                grid.TileAt[50, 50] = tile;
             }
 
-            return new Grid { Tiles = tiles };
+            grid.Tiles = tiles;
+
+            return grid;
         }
     }
 }

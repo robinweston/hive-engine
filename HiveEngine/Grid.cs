@@ -25,7 +25,7 @@ namespace HiveEngine
             }
         }
 
-        public IEnumerable<Tile> Tiles { get; private set; }
+        public IEnumerable<Tile> Tiles { get; internal set; }
 
         public Tile[,] TileAt { get; private set; }
     }
