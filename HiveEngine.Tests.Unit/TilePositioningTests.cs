@@ -5,21 +5,13 @@ using NUnit.Framework;
 namespace HiveEngine.Tests.Unit
 {
     [TestFixture]
-    class PositionalParsingTests
+    class TilePositioningTests
     {
-        [Test]
-        public void grid_is_created_100_by_100()
-        {
-            var grid = new Grid();
-
-            grid.TileAt.GetLength(0).Should().Be(100);
-            grid.TileAt.GetLength(1).Should().Be(100);
-        }
 
         [Test]
         public void new_grid_contains_no_tiles()
         {
-            var grid = new Grid();
+            var grid = GridResourceParser.ParseGrid("empty");
 
             for (var x = 0; x < grid.TileAt.GetLength(0); x++)
             {
@@ -30,7 +22,7 @@ namespace HiveEngine.Tests.Unit
             }
         }
 
-        [Test]
+        [Test, Ignore]
         public void single_tile_is_at_position_50_50()
         {
             var grid = GridResourceParser.ParseGrid("single-white-queen");

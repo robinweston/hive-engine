@@ -4,12 +4,10 @@ namespace HiveEngine
 {
     public class Grid
     {
-        const int GridSize = 100;
-
-        public Grid()
+        public Grid(int width, int height)
         {
             Tiles = new List<Tile>();
-            TileAt = new Tile[GridSize, GridSize];
+            TileAt = new Tile[width, height];
 
             FileWithEmptyTiles();
         }

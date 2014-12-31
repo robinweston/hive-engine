@@ -49,10 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PositionalParsingTests.cs" />
+    <Compile Include="GridSizingTests.cs" />
     <Compile Include="GridResourceParser.cs" />
     <Compile Include="SimpleParsingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TilePositioningTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
