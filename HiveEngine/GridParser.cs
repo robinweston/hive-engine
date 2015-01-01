@@ -19,6 +19,17 @@ namespace HiveEngine
 
             var grid = new Grid(gridWidth, gridHeight);
 
+            for (var lineNumber = 0; lineNumber < gridLines.Length; lineNumber++)
+            {
+                var line = gridLines[lineNumber];
+                var lineMatches = Regex.Matches(gridText, "[A-Za-z]");
+                foreach (Match lineMatch in lineMatches)
+                {
+                    var matchIndex = lineMatch.Index;
+                }
+
+            }
+
             foreach (Match match in tileMatches)
             {
                 var tileColor = Regex.Match(match.Value, "[A-Z]").Success ? TileColor.Black : TileColor.White;
