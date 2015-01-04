@@ -48,18 +48,15 @@ namespace HiveEngine
 
         private static int CalculateGridWidth(string[] gridLines)
         {
-            if (gridLines.Any() == false)
+            var longestGridLine = gridLines.Any() ? gridLines.Max(gl => gl.Length) : 0;
+
+            switch (longestGridLine)
             {
-                // special case for empty board
-                return 1;
+                case 0:
+                    return 1;
+                default:
+                    return (longestGridLine + 7) / 4;
             }
-
-            const int HorizontalCharsPerTile = 5;
-            var longestLineLength = gridLines.Max(l => l.Length);
-            var tilesInLongestLine = (longestLineLength + 1) / HorizontalCharsPerTile;
-
-            // add 2 to allow playing to the left or right of existing tiles
-            return tilesInLongestLine + 2;
         }
 
         private static int CalculateGridHeight(string[] gridLines)
