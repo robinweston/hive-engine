@@ -9,39 +9,35 @@ namespace HiveEngine
     {
         public Grid ParseGrid(string gridText)
         {
-            var tiles = new List<Tile>();
-
-            var tileMatches = Regex.Matches(gridText, "[A-Za-z]");
-
             var gridLines = gridText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            var gridWidth = CalculateGridWidth(gridLines);
-            var gridHeight = CalculateGridHeight(gridLines);
-
-            var grid = new Grid(gridWidth, gridHeight);
+            var grid = CreateGrid(gridLines);
 
             for (var lineNumber = 0; lineNumber < gridLines.Length; lineNumber++)
             {
                 var line = gridLines[lineNumber];
-                var lineMatches = Regex.Matches(gridText, "[A-Za-z]");
+                var lineMatches = Regex.Matches(line, "[A-Za-z]");
                 foreach (Match lineMatch in lineMatches)
                 {
-                    var matchIndex = lineMatch.Index;
+                    var tileX = lineMatch.Index / 2;
+                    var tileY = (lineNumber + 3) / 2;
+
+                    var tileColor = Regex.Match(lineMatch.Value, "[A-Z]").Success ? TileColor.Black : TileColor.White;
+                    var tile = new Tile(tileColor);
+
+                    grid.Tiles[tileX, tileY] = tile;
                 }
 
             }
 
-            foreach (Match match in tileMatches)
-            {
-                var tileColor = Regex.Match(match.Value, "[A-Z]").Success ? TileColor.Black : TileColor.White;
-                var tile = new Tile(tileColor);
+            return grid;
+        }
 
-                tiles.Add(tile);
+        static Grid CreateGrid(string[] gridLines)
+        {
+            var gridWidth = CalculateGridWidth(gridLines);
+            var gridHeight = CalculateGridHeight(gridLines);
 
-                //grid.TileAt[50, 50] = tile;
-            }
-
-            grid.Tiles = tiles;
-
+            var grid = new Grid(gridWidth, gridHeight);
             return grid;
         }
 

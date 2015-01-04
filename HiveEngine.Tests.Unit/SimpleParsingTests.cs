@@ -14,7 +14,7 @@ namespace HiveEngine.Tests.Unit
         {
             var grid = GridResourceParser.ParseGrid("empty");
 
-            grid.Tiles.Count().Should().Be(0);
+            grid.Tiles.AllPlaced().Count().Should().Be(0);
         }
 
         [Test]
@@ -22,7 +22,7 @@ namespace HiveEngine.Tests.Unit
         {
             var grid = GridResourceParser.ParseGrid("single-white-queen");
 
-            grid.Tiles.Single().Color.Should().Be(TileColor.White);
+            grid.Tiles.AllPlaced().Single().Color.Should().Be(TileColor.White);
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace HiveEngine.Tests.Unit
         {
             var grid = GridResourceParser.ParseGrid("single-black-queen");
 
-            grid.Tiles.Single().Color.Should().Be(TileColor.Black);
+            grid.Tiles.AllPlaced().Single().Color.Should().Be(TileColor.Black);
         }
 
         [Test]
@@ -38,8 +38,8 @@ namespace HiveEngine.Tests.Unit
         {
             var grid = GridResourceParser.ParseGrid("two-queens-horizontal");
 
-            grid.Tiles.ElementAt(0).Color.Should().Be(TileColor.White);
-            grid.Tiles.ElementAt(1).Color.Should().Be(TileColor.Black);
+            grid.Tiles.AllPlaced().ElementAt(0).Color.Should().Be(TileColor.White);
+            grid.Tiles.AllPlaced().ElementAt(1).Color.Should().Be(TileColor.Black);
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace HiveEngine.Tests.Unit
         {
             var grid = GridResourceParser.ParseGrid(gridName);
 
-            grid.Tiles.Count().Should().Be(2);
+            grid.Tiles.AllPlaced().Count().Should().Be(2);
         }
     }
 }

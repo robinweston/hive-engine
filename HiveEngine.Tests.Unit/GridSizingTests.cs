@@ -15,8 +15,8 @@ namespace HiveEngine.Tests.Unit
         {
             var grid = GridResourceParser.ParseGrid(gridName);
 
-            grid.TileAt.GetLength(0).Should().Be(expectedWidth);
-            grid.TileAt.GetLength(1).Should().Be(expectedHeight);
+            grid.Tiles.GetLength(0).Should().Be(expectedWidth);
+            grid.Tiles.GetLength(1).Should().Be(expectedHeight);
         }
     }
 }

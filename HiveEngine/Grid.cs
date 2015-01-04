@@ -6,25 +6,22 @@ namespace HiveEngine
     {
         public Grid(int width, int height)
         {
-            Tiles = new List<Tile>();
-            TileAt = new Tile[width, height];
+            Tiles = new Tile[width, height];
 
             FileWithEmptyTiles();
         }
 
         private void FileWithEmptyTiles()
         {
-            for (var x = 0; x < TileAt.GetLength(0); x++)
+            for (var x = 0; x < Tiles.GetLength(0); x++)
             {
-                for (var y = 0; y < TileAt.GetLength(1); y++)
+                for (var y = 0; y < Tiles.GetLength(1); y++)
                 {
-                    TileAt[x, y] = Tile.None;
+                    Tiles[x, y] = Tile.None;
                 }
             }
         }
 
-        public IEnumerable<Tile> Tiles { get; internal set; }
-
-        public Tile[,] TileAt { get; private set; }
+        public Tile[,] Tiles { get; private set; }
     }
 }

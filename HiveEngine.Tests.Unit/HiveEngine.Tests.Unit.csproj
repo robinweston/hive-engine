@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GridExtensions.cs" />
     <Compile Include="GridSizingTests.cs" />
     <Compile Include="GridResourceParser.cs" />
     <Compile Include="SimpleParsingTests.cs" />
