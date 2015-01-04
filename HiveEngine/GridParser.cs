@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -16,13 +15,13 @@ namespace HiveEngine
             {
                 var line = gridLines[lineNumber];
                 var lineMatches = Regex.Matches(line, "[A-Za-z]");
+
                 foreach (Match lineMatch in lineMatches)
                 {
-                    var tileX = lineMatch.Index / 2;
-                    var tileY = (lineNumber + 3) / 2;
+                    var tileX = ((lineMatch.Index - 2) / 4) + 1;
+                    var tileY = lineNumber + 1;
 
-                    var tileColor = Regex.Match(lineMatch.Value, "[A-Z]").Success ? TileColor.Black : TileColor.White;
-                    var tile = new Tile(tileColor);
+                    var tile = CreateTile(lineMatch.Value);
 
                     grid.Tiles[tileX, tileY] = tile;
                 }
@@ -30,6 +29,12 @@ namespace HiveEngine
             }
 
             return grid;
+        }
+
+        static Tile CreateTile(string tileIdentifier)
+        {
+            var tileColor = Regex.Match(tileIdentifier, "[A-Z]").Success ? TileColor.Black : TileColor.White;
+            return new Tile(tileColor);
         }
 
         static Grid CreateGrid(string[] gridLines)
@@ -59,17 +64,18 @@ namespace HiveEngine
 
         private static int CalculateGridHeight(string[] gridLines)
         {
-            if (gridLines.Any() == false)
+            var gridLinesCount = gridLines.Count();
+
+            switch (gridLinesCount)
             {
-                // special case for empty board
-                return 1;
+                case 0:
+                    return 1;
+                case 3:
+                    return 3;
+                default:
+                    return gridLinesCount + 2;
+
             }
-
-            const int VerticalCharsPerTile = 3;
-            var tilesInHighestColumn = (gridLines.Length + 1) / VerticalCharsPerTile;
-
-            // add 2 to allow playing above or below existing tiles
-            return tilesInHighestColumn + 2;
         }
     }
 }

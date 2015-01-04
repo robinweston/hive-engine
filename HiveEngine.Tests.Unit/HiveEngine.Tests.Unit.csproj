@@ -72,7 +72,7 @@
     <EmbeddedResource Include="Grids\two-queens-horizontal.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Grids\two-tiles-vertical.txt" />
+    <EmbeddedResource Include="Grids\two-queens-vertical.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Grids\single-white-queen.txt" />

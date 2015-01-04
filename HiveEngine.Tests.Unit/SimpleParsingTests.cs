@@ -44,7 +44,7 @@ namespace HiveEngine.Tests.Unit
 
         [Test]
         [TestCase("two-queens-horizontal")]
-        [TestCase("two-tiles-vertical")]
+        [TestCase("two-queens-vertical")]
         public void two_tile_grids_parse_correctly(string gridName)
         {
             var grid = GridResourceParser.ParseGrid(gridName);

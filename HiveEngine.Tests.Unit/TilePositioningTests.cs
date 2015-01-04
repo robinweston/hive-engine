@@ -31,6 +31,24 @@ namespace HiveEngine.Tests.Unit
         }
 
         [Test]
+        public void two_horizontal_tiles_with_left_above_right_are_positioned_correctly()
+        {
+            var grid = GridResourceParser.ParseGrid("two-queens-horizontal");
+
+            grid.Tiles[1, 2].Color.Should().Be(TileColor.White);
+            grid.Tiles[2, 3].Color.Should().Be(TileColor.Black);
+        }
+
+        [Test]
+        public void two_vertical_tiles_with_left_above_right_are_positioned_correctly()
+        {
+            var grid = GridResourceParser.ParseGrid("two-queens-vertical");
+
+            grid.Tiles[1, 2].Color.Should().Be(TileColor.White);
+            grid.Tiles[1, 4].Color.Should().Be(TileColor.Black);
+        }
+
+        [Test]
         public void spaces_exist_around_single_tile()
         {
             var grid = GridResourceParser.ParseGrid("single-white-queen");
