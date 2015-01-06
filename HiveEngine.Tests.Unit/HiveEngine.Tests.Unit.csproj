@@ -54,6 +54,7 @@
     <Compile Include="GridResourceParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TilePositioningTests.cs" />
+    <Compile Include="ValidMoveTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

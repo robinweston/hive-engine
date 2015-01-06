@@ -16,7 +16,7 @@ namespace HiveEngine.Tests.Unit
 
         private static string ParseFile(string fileName)
         {
-            var assembly = typeof(SimpleParsingTests).Assembly;
+            var assembly = typeof(GridSizingTests).Assembly;
             var resourceName = "HiveEngine.Tests.Unit.Grids." + fileName;
 
             using (var stream = assembly.GetManifestResourceStream(resourceName))

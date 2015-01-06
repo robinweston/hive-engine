@@ -39,9 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameEngine.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="GridParser.cs" />
     <Compile Include="Insect.cs" />
+    <Compile Include="Move.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="TileColor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tile.cs" />
