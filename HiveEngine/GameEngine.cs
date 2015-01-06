@@ -11,7 +11,7 @@ namespace HiveEngine
 
             if (gameState.Grid.Tiles.GetLength(0) == 1 && gameState.Grid.Tiles.GetLength(1) == 1)
             {
-                foreach (var tile in gameState.TilesToPlay)
+                foreach (var tile in gameState.WhiteTilesToPlay)
                 {
                     yield return new Move(tile, new Position(0, 0));
                 }
