@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Collections.Generic;
+using FluentAssertions;
 
 using NUnit.Framework;
 
@@ -13,13 +15,7 @@ namespace HiveEngine.Tests.Unit
         {
             var grid = GridResourceParser.ParseGrid("empty");
 
-            for (var x = 0; x < grid.Tiles.GetLength(0); x++)
-            {
-                for (var y = 0; y < grid.Tiles.GetLength(1); y++)
-                {
-                    grid.Tiles[x, y].Should().Be(Tile.None);
-                }
-            }
+            grid.Tiles.AssertAllEmptyExcept(new List<Tuple<int, int>>());
         }
 
         [Test]
@@ -28,6 +24,12 @@ namespace HiveEngine.Tests.Unit
             var grid = GridResourceParser.ParseGrid("single-white-queen");
 
             grid.Tiles[1, 2].Color.Should().Be(TileColor.White);
+            grid.Tiles[1, 2].Insect.Should().Be(Insect.Queen);
+
+            grid.Tiles.AssertAllEmptyExcept(new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(1, 2)
+            });
         }
 
         [Test]
@@ -37,6 +39,12 @@ namespace HiveEngine.Tests.Unit
 
             grid.Tiles[1, 2].Color.Should().Be(TileColor.White);
             grid.Tiles[2, 3].Color.Should().Be(TileColor.Black);
+
+            grid.Tiles.AssertAllEmptyExcept(new List<Tuple<int, int>>
+            {
+                new Tuple<int, int>(1, 2),
+                new Tuple<int, int>(2, 3)
+            });
         }
 
         [Test]
@@ -46,23 +54,12 @@ namespace HiveEngine.Tests.Unit
 
             grid.Tiles[1, 2].Color.Should().Be(TileColor.White);
             grid.Tiles[1, 4].Color.Should().Be(TileColor.Black);
-        }
 
-        [Test]
-        public void spaces_exist_around_single_tile()
-        {
-            var grid = GridResourceParser.ParseGrid("single-white-queen");
-
-            for (var x = 0; x < grid.Tiles.GetLength(0); x++)
+            grid.Tiles.AssertAllEmptyExcept(new List<Tuple<int, int>>
             {
-                for (var y = 0; y < grid.Tiles.GetLength(1); y++)
-                {
-                    if (x != 1 && y != 2)
-                    {
-                        grid.Tiles[x, y].Should().Be(Tile.None);
-                    }
-                }
-            }
+                new Tuple<int, int>(1, 2),
+                new Tuple<int, int>(1, 4)
+            });
         }
     }
 }

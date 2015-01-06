@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -21,7 +22,7 @@ namespace HiveEngine
                     var tileX = ((lineMatch.Index - 2) / 4) + 1;
                     var tileY = lineNumber + 1;
 
-                    var tile = CreateTile(lineMatch.Value);
+                    var tile = new Tile(lineMatch.Value);
 
                     grid.Tiles[tileX, tileY] = tile;
                 }
@@ -31,20 +32,7 @@ namespace HiveEngine
             return grid;
         }
 
-        static Tile CreateTile(string tileIdentifier)
-        {
-            var tileColor = Regex.Match(tileIdentifier, "[A-Z]").Success ? TileColor.Black : TileColor.White;
-            var insect = Insect.None;
-            switch (tileIdentifier.ToLower())
-            {
-                case "q":
-                    insect = Insect.Queen;
-                    break;
-            }
-            return new Tile(tileColor, insect);
-        }
-
-        static Grid CreateGrid(string[] gridLines)
+        private static Grid CreateGrid(string[] gridLines)
         {
             var gridWidth = CalculateGridWidth(gridLines);
             var gridHeight = CalculateGridHeight(gridLines);
@@ -66,7 +54,7 @@ namespace HiveEngine
             }
         }
 
-        private static int CalculateGridHeight(string[] gridLines)
+        private static int CalculateGridHeight(IEnumerable<string> gridLines)
         {
             var gridLinesCount = gridLines.Count();
 

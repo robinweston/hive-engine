@@ -52,7 +52,6 @@
     <Compile Include="GridExtensions.cs" />
     <Compile Include="GridSizingTests.cs" />
     <Compile Include="GridResourceParser.cs" />
-    <Compile Include="SimpleParsingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TilePositioningTests.cs" />
   </ItemGroup>
