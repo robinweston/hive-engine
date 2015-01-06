@@ -24,11 +24,11 @@ namespace HiveEngine.Tests.Unit
             return tiles.Where(t => t != Tile.None);
         }
 
-        public static void AssertAllEmptyExcept(this Tile[,] tileGrid, IEnumerable<Tuple<int, int>> exceptionPoints)
+        public static void AssertAllEmptyExcept(this Tile[,] tileGrid, IEnumerable<Position> exceptionPoints)
         {
             tileGrid.ForAll((x, y, t) =>
             {
-                if(exceptionPoints.SingleOrDefault(p => p.Item1 == x && p.Item2 == y) == null)
+                if(exceptionPoints.SingleOrDefault(p => p.X == x && p.Y == y) == null)
                 {
                     t.Should().Be(Tile.None);
                 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 
 using NUnit.Framework;
@@ -14,8 +15,8 @@ namespace HiveEngine.Tests.Unit
         public void new_grid_contains_no_tiles()
         {
             var grid = GridResourceParser.ParseGrid("empty");
-
-            grid.Tiles.AssertAllEmptyExcept(new List<Tuple<int, int>>());
+            
+            grid.Tiles.AssertAllEmptyExcept(Enumerable.Empty<Position>());
         }
 
         [Test]
@@ -26,9 +27,9 @@ namespace HiveEngine.Tests.Unit
             grid.Tiles[1, 2].Color.Should().Be(TileColor.White);
             grid.Tiles[1, 2].Insect.Should().Be(Insect.Queen);
 
-            grid.Tiles.AssertAllEmptyExcept(new List<Tuple<int, int>>
+            grid.Tiles.AssertAllEmptyExcept(new []
             {
-                new Tuple<int, int>(1, 2)
+                new Position(1, 2)
             });
         }
 
@@ -40,10 +41,9 @@ namespace HiveEngine.Tests.Unit
             grid.Tiles[1, 2].Color.Should().Be(TileColor.White);
             grid.Tiles[2, 3].Color.Should().Be(TileColor.Black);
 
-            grid.Tiles.AssertAllEmptyExcept(new List<Tuple<int, int>>
-            {
-                new Tuple<int, int>(1, 2),
-                new Tuple<int, int>(2, 3)
+            grid.Tiles.AssertAllEmptyExcept(new []{
+                new Position(1, 2),
+                new Position(2, 3)
             });
         }
 
@@ -55,10 +55,10 @@ namespace HiveEngine.Tests.Unit
             grid.Tiles[1, 2].Color.Should().Be(TileColor.White);
             grid.Tiles[1, 4].Color.Should().Be(TileColor.Black);
 
-            grid.Tiles.AssertAllEmptyExcept(new List<Tuple<int, int>>
+            grid.Tiles.AssertAllEmptyExcept(new []
             {
-                new Tuple<int, int>(1, 2),
-                new Tuple<int, int>(1, 4)
+                new Position(1, 2),
+                new Position(1, 4)
             });
         }
     }
