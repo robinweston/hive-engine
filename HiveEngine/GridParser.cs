@@ -34,7 +34,14 @@ namespace HiveEngine
         static Tile CreateTile(string tileIdentifier)
         {
             var tileColor = Regex.Match(tileIdentifier, "[A-Z]").Success ? TileColor.Black : TileColor.White;
-            return new Tile(tileColor);
+            var insect = Insect.None;
+            switch (tileIdentifier.ToLower())
+            {
+                case "q":
+                    insect = Insect.Queen;
+                    break;
+            }
+            return new Tile(tileColor, insect);
         }
 
         static Grid CreateGrid(string[] gridLines)

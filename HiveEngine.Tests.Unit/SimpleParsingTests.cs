@@ -23,6 +23,7 @@ namespace HiveEngine.Tests.Unit
             var grid = GridResourceParser.ParseGrid("single-white-queen");
 
             grid.Tiles.AsEnumerable().PlacedOnly().Single().Color.Should().Be(TileColor.White);
+            grid.Tiles.AsEnumerable().PlacedOnly().Single().Insect.Should().Be(Insect.Queen);
         }
 
         [Test]
