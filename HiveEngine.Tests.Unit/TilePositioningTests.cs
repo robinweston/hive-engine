@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FluentAssertions;
 
 using NUnit.Framework;
@@ -20,7 +18,7 @@ namespace HiveEngine.Tests.Unit
         }
 
         [Test]
-        public void single_tile_is_at_position_1_2()
+        public void single_tile_is_at_correct_position()
         {
             var grid = GridResourceParser.ParseGrid("single-white-queen");
 

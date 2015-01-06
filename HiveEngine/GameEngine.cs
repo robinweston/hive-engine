@@ -1,17 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HiveEngine
 {
     public class GameEngine
     {
-        public IEnumerable<Move> ComputeValidMoves()
+        public IEnumerable<Move> FindValidMoves(GameState gameState)
         {
-            var move = new Move("queen", new Position(0, 0));
+            if(gameState == null)throw new ArgumentNullException("gameState");
 
-            return new[]
+            if (gameState.Grid.Tiles.GetLength(0) == 1 && gameState.Grid.Tiles.GetLength(1) == 1)
             {
-                move
-            };
+                foreach (var tile in gameState.TilesToPlay)
+                {
+                    yield return new Move(tile, new Position(0, 0));
+                }
+            }           
         }
     }
 }

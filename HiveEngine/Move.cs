@@ -1,19 +1,20 @@
 using System;
+using System.ComponentModel;
 
 namespace HiveEngine
 {
     public class Move
     {
-        public Move(string tileId, Position to)
+        public Move(Tile tile, Position to)
         {
-            if (string.IsNullOrWhiteSpace(tileId)) throw new ArgumentNullException("tileId");
+            if (tile == null) throw new ArgumentNullException("tile");
             if (to == null) throw new ArgumentNullException("to");
 
-            TileId = tileId;
+            Tile = tile;
             To = to;
         }
 
-        public string TileId { get; private set; }
         public Position To { get; private set; }
+        public Tile Tile { get; private set; }
     }
 }

@@ -37,6 +37,8 @@ namespace HiveEngine
             {
                 case "q":
                     return Insect.Queen;
+                case "a":
+                    return Insect.Ant;
             }
 
             return Insect.None;

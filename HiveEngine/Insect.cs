@@ -3,6 +3,7 @@ namespace HiveEngine
     public enum Insect
     {
         None,
-        Queen
+        Queen,
+        Ant
     }
 }
