@@ -13,59 +13,64 @@ namespace HiveEngine
 
             if (gameState.TurnNumber == 0)
             {
-                foreach (var tile in gameState.WhiteTilesToPlay)
-                {
-                    yield return new Move(tile, new Position(0, 0));
-                }
+                return CreateValidInitialWhiteMoves(gameState);
             }
-            else if (gameState.TurnNumber == 1)
+            
+            if (gameState.TurnNumber == 1)
             {
-                foreach (var adjacentPosition in FindAdjacentPositions(new Position(1, 2)))
-                {
-                    foreach (var tile in gameState.BlackTilesToPlay)
-                    {
-                        yield return new Move(tile, adjacentPosition);
-                    }
-                }
+                return CreateValidInitialBlackMoves(gameState);
             }
-            else
-            {
-                var positionsAdjacentToCurrentPlayer = new List<Position>();
-                var positionsAdjacentToOpposition = new List<Position>();
-                var emptyPositions = new List<Position>();
+            
+            return CreateNonInitialValidMoves(gameState);
+        }
 
-                gameState.Grid.Tiles.ForEach((position, tile) =>
+        private static IEnumerable<Move> CreateValidInitialWhiteMoves(GameState gameState)
+        {
+            return gameState.WhiteTilesToPlay.Select(tile => new Move(tile, new Position(0, 0)));
+        }
+
+        private IEnumerable<Move> CreateValidInitialBlackMoves(GameState gameState)
+        {
+            return from adjacentPosition in FindAdjacentPositions(new Position(1, 2))
+                   from tile in gameState.BlackTilesToPlay
+                   select new Move(tile, adjacentPosition);
+        }
+
+        private IEnumerable<Move> CreateNonInitialValidMoves(GameState gameState)
+        {
+            var positionsAdjacentToCurrentPlayer = new List<Position>();
+            var positionsAdjacentToOpposition = new List<Position>();
+            var emptyPositions = new List<Position>();
+
+            gameState.Grid.Tiles.ForEach((position, tile) =>
+            {
+                if (tile == Tile.None)
                 {
-                    if (tile == Tile.None)
+                    emptyPositions.Add(position);
+                }
+                else
+                {
+                    var adjacentPositions = FindAdjacentPositions(position);
+                    if (tile.Color == gameState.PlayerToPlay)
                     {
-                        emptyPositions.Add(position);
+                        positionsAdjacentToCurrentPlayer.AddRange(adjacentPositions);
                     }
                     else
                     {
-                        var adjacentPositions = FindAdjacentPositions(position);
-                        if (tile.Color == gameState.PlayerToPlay)
-                        {
-                            positionsAdjacentToCurrentPlayer.AddRange(adjacentPositions);
-                        }
-                        else
-                        {
-                            positionsAdjacentToOpposition.AddRange(adjacentPositions);
-                        }
-                    }
-                });
-
-                var playablePositions = positionsAdjacentToCurrentPlayer.Intersect(emptyPositions).Except(positionsAdjacentToOpposition);
-                var currentPlayerTiles = gameState.PlayerToPlay == TileColor.White
-                    ? gameState.WhiteTilesToPlay
-                    : gameState.BlackTilesToPlay;
-                foreach (var position in playablePositions)
-                {
-                    foreach (var tile in currentPlayerTiles)
-                    {
-                        yield return new Move(tile, position);
+                        positionsAdjacentToOpposition.AddRange(adjacentPositions);
                     }
                 }
-            }
+            });
+
+            var playablePositions = positionsAdjacentToCurrentPlayer.Intersect(emptyPositions).Except(positionsAdjacentToOpposition);
+
+            var currentPlayerTiles = gameState.PlayerToPlay == TileColor.White
+                ? gameState.WhiteTilesToPlay
+                : gameState.BlackTilesToPlay;
+
+            return from position in playablePositions 
+                   from tile in currentPlayerTiles 
+                   select new Move(tile, position);
         }
 
         private static IEnumerable<Position> FindAdjacentPositions(Position position)
