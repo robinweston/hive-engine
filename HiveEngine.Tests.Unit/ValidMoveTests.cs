@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
+using HiveEngine.Tests.Unit.Utilities;
 using NUnit.Framework;
 
 namespace HiveEngine.Tests.Unit
@@ -55,6 +56,13 @@ namespace HiveEngine.Tests.Unit
             var validMoves = _gameEngine.FindValidMoves(gameState);
 
             validMoves.Count().Should().Be(6);
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(1, 0)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(0, 1)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(2, 1)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(0, 3)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(1, 4)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(2, 3)));
+
         }
     }
 }

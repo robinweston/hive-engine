@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace HiveEngine.Tests.Unit
+namespace HiveEngine.Tests.Unit.Utilities
 {
     public static class GridResourceParser
     {

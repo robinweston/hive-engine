@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FluentAssertions;
-
+using HiveEngine.Tests.Unit.Extensions;
+using HiveEngine.Tests.Unit.Utilities;
 using NUnit.Framework;
 
 namespace HiveEngine.Tests.Unit
