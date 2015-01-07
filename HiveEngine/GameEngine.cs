@@ -9,7 +9,7 @@ namespace HiveEngine
     {
         public IEnumerable<Move> FindValidMoves(GameState gameState)
         {
-            if(gameState == null)throw new ArgumentNullException("gameState");
+            if (gameState == null) throw new ArgumentNullException("gameState");
 
             if (gameState.TurnNumber == 0)
             {
@@ -28,7 +28,7 @@ namespace HiveEngine
                     }
                 }
             }
-            else
+            else if (gameState.PlayerToPlay == TileColor.White)
             {
                 var positionsAdjacentToWhiteTiles = new List<Position>();
                 var positionsAdjacentToBlackTiles = new List<Position>();
@@ -58,6 +58,41 @@ namespace HiveEngine
                 foreach (var position in positionsWhiteCanPlay)
                 {
                     foreach (var tile in gameState.WhiteTilesToPlay)
+                    {
+                        yield return new Move(tile, position);
+                    }
+                }
+            }
+            else
+            {
+                var positionsAdjacentToWhiteTiles = new List<Position>();
+                var positionsAdjacentToBlackTiles = new List<Position>();
+                var emptyPositions = new List<Position>();
+
+                for (var x = 0; x < gameState.Grid.Tiles.GetLength(0); x++)
+                {
+                    for (var y = 0; y < gameState.Grid.Tiles.GetLength(1); y++)
+                    {
+                        var tile = gameState.Grid.Tiles[x, y];
+                        if (tile.Color == TileColor.Black)
+                        {
+                            positionsAdjacentToBlackTiles.AddRange(FindAdjacentPositions(new Position(x, y)));
+                        }
+                        else if (tile.Color == TileColor.White)
+                        {
+                            positionsAdjacentToWhiteTiles.AddRange(FindAdjacentPositions(new Position(x, y)));
+                        }
+                        else
+                        {
+                            emptyPositions.Add(new Position(x, y));
+                        }
+                    }
+                }
+
+                var positionsBlackCanPlay = positionsAdjacentToBlackTiles.Intersect(emptyPositions).Except(positionsAdjacentToWhiteTiles);
+                foreach (var position in positionsBlackCanPlay)
+                {
+                    foreach (var tile in gameState.BlackTilesToPlay)
                     {
                         yield return new Move(tile, position);
                     }
