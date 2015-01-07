@@ -53,10 +53,11 @@
     <Compile Include="GridSizingTests.cs" />
     <Compile Include="InsectTypeParsingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecondMoveTests.cs" />
     <Compile Include="TilePositioningTests.cs" />
     <Compile Include="TurnOrderingTests.cs" />
     <Compile Include="Utilities\GridResourceParser.cs" />
-    <Compile Include="ValidMoveTests.cs" />
+    <Compile Include="InitialMoveTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

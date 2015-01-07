@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace HiveEngine.Tests.Unit
 {
     [TestFixture]
-    class ValidMoveTests
+    class InitialMoveTests
     {
         private GameEngine _gameEngine;
 
@@ -50,7 +50,7 @@ namespace HiveEngine.Tests.Unit
         {
             var grid = GridResourceParser.ParseGrid("single-white-queen");
 
-            var blackTilesToPlay = new[] {new Tile(TileColor.Black, Insect.Queen)};
+            var blackTilesToPlay = new[] { new Tile(TileColor.Black, Insect.Queen) };
             var gameState = new GameState(grid, 1, Enumerable.Empty<Tile>(), blackTilesToPlay);
 
             var validMoves = _gameEngine.FindValidMoves(gameState);
