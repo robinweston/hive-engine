@@ -34,30 +34,25 @@ namespace HiveEngine
                 var positionsAdjacentToOpposition = new List<Position>();
                 var emptyPositions = new List<Position>();
 
-                for (var x = 0; x < gameState.Grid.Tiles.GetLength(0); x++)
+                gameState.Grid.Tiles.ForAll((position, tile) =>
                 {
-                    for (var y = 0; y < gameState.Grid.Tiles.GetLength(1); y++)
+                    if (tile == Tile.None)
                     {
-                        var position = new Position(x, y);
-                        var tile = gameState.Grid.Tiles[x, y];
-                        if (tile.Color == TileColor.None)
+                        emptyPositions.Add(position);
+                    }
+                    else
+                    {
+                        var adjacentPositions = FindAdjacentPositions(position);
+                        if (tile.Color == gameState.PlayerToPlay)
                         {
-                            emptyPositions.Add(position);
+                            positionsAdjacentToCurrentPlayer.AddRange(adjacentPositions);
                         }
                         else
                         {
-                            var adjacentPositions = FindAdjacentPositions(position);
-                            if (tile.Color == gameState.PlayerToPlay)
-                            {
-                                positionsAdjacentToCurrentPlayer.AddRange(adjacentPositions);
-                            }
-                            else
-                            {
-                                positionsAdjacentToOpposition.AddRange(adjacentPositions);
-                            }
+                            positionsAdjacentToOpposition.AddRange(adjacentPositions);
                         }
                     }
-                }
+                });
 
                 var playablePositions = positionsAdjacentToCurrentPlayer.Intersect(emptyPositions).Except(positionsAdjacentToOpposition);
                 var currentPlayerTiles = gameState.PlayerToPlay == TileColor.White
