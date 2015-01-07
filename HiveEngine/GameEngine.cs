@@ -22,12 +22,15 @@ namespace HiveEngine
             {
                 foreach(var adjacentPosition in FindAdjacentPositions(new Position(1, 2)))
                 {
-                    yield return new Move(new Tile(TileColor.Black, Insect.Queen), adjacentPosition);
+                    foreach (var tile in gameState.BlackTilesToPlay)
+                    {
+                        yield return new Move(tile, adjacentPosition);                        
+                    }
                 }
             }
         }
 
-        private IEnumerable<Position> FindAdjacentPositions(Position position)
+        private static IEnumerable<Position> FindAdjacentPositions(Position position)
         {
             // above
             yield return new Position(position.X, position.Y - 2);

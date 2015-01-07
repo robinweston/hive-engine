@@ -64,5 +64,37 @@ namespace HiveEngine.Tests.Unit
             validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(2, 3)));
 
         }
+
+        [Test]
+        public void if_black_has_two_tiles_tile_they_have_correct_initial_valid_moves()
+        {
+            var grid = GridResourceParser.ParseGrid("single-white-queen");
+
+            var blackTilesToPlay = new[]
+            {
+                new Tile(TileColor.Black, Insect.Queen),
+                new Tile(TileColor.Black, Insect.Ant)
+            };
+            var gameState = new GameState(grid, 1, Enumerable.Empty<Tile>(), blackTilesToPlay);
+
+            var validMoves = _gameEngine.FindValidMoves(gameState);
+
+            validMoves.Count().Should().Be(12);
+
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(1, 0)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(0, 1)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(2, 1)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(0, 3)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(1, 4)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Queen && m.To.Equals(new Position(2, 3)));
+
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(1, 0)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(0, 1)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(2, 1)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(0, 3)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(1, 4)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.Black && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(2, 3)));
+
+        }
     }
 }
