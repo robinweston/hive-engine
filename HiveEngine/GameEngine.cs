@@ -57,7 +57,10 @@ namespace HiveEngine
                 var positionsWhiteCanPlay = positionsAdjacentToWhiteTiles.Intersect(emptyPositions).Except(positionsAdjacentToBlackTiles);
                 foreach (var position in positionsWhiteCanPlay)
                 {
-                    yield return new Move(gameState.WhiteTilesToPlay.Single(), position);
+                    foreach (var tile in gameState.WhiteTilesToPlay)
+                    {
+                        yield return new Move(tile, position);
+                    }
                 }
             }
         }

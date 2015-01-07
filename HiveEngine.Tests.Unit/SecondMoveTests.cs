@@ -24,5 +24,31 @@ namespace HiveEngine.Tests.Unit
             validMoves.Should().Contain(m => m.Tile.Color == TileColor.White && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(0, 1)));
             validMoves.Should().Contain(m => m.Tile.Color == TileColor.White && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(0, 3)));
         }
+
+        [Test]
+        public void white_second_turns_with_two_available_tiles_has_correct_valid_moves_available()
+        {
+            var grid = GridResourceParser.ParseGrid("two-queens-horizontal");
+
+            var whiteTilesToPlay = new[]
+            {
+                new Tile(TileColor.White, Insect.Ant), 
+                new Tile(TileColor.White, Insect.Spider)
+            };
+            var gameState = new GameState(grid, 2, whiteTilesToPlay, Enumerable.Empty<Tile>());
+
+            var gameEngine = new GameEngine();
+            var validMoves = gameEngine.FindValidMoves(gameState);
+
+            validMoves.Count().Should().Be(6);
+
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.White && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(1, 0)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.White && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(0, 1)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.White && m.Tile.Insect == Insect.Ant && m.To.Equals(new Position(0, 3)));
+
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.White && m.Tile.Insect == Insect.Spider && m.To.Equals(new Position(1, 0)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.White && m.Tile.Insect == Insect.Spider && m.To.Equals(new Position(0, 1)));
+            validMoves.Should().Contain(m => m.Tile.Color == TileColor.White && m.Tile.Insect == Insect.Spider && m.To.Equals(new Position(0, 3)));
+        }
     }
 }

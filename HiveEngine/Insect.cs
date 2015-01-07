@@ -4,6 +4,7 @@ namespace HiveEngine
     {
         None,
         Queen,
-        Ant
+        Ant,
+        Spider
     }
 }
