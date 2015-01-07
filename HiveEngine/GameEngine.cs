@@ -34,7 +34,7 @@ namespace HiveEngine
                 var positionsAdjacentToOpposition = new List<Position>();
                 var emptyPositions = new List<Position>();
 
-                gameState.Grid.Tiles.ForAll((position, tile) =>
+                gameState.Grid.Tiles.ForEach((position, tile) =>
                 {
                     if (tile == Tile.None)
                     {

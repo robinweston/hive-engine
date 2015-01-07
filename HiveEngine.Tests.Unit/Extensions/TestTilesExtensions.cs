@@ -9,7 +9,7 @@ namespace HiveEngine.Tests.Unit.Extensions
     {
         public static void AssertAllEmptyExcept(this Tile[,] tileGrid, IEnumerable<Position> exceptionPoints)
         {
-            tileGrid.ForAll((p, t) =>
+            tileGrid.ForEach((p, t) =>
             {
                 if(exceptionPoints.Contains(p) == false)
                 {

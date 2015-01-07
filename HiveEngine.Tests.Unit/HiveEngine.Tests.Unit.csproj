@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\TestMoveExtensions.cs" />
     <Compile Include="Extensions\TestTilesExtensions.cs" />
     <Compile Include="GridSizingTests.cs" />
     <Compile Include="InsectTypeParsingTests.cs" />
